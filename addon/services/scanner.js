@@ -1,6 +1,7 @@
 import Service, { inject as service } from '@ember/service';
 import { isPresent } from '@ember/utils';
 import { action } from '@ember/object';
+import { tracked } from '@ember/tracked';
 import { registerDestructor } from '@ember/destroyable';
 import { assert } from '@ember/debug';
 
@@ -15,6 +16,7 @@ export default class ScannerService extends Service {
   onScan;
   barcode = '';
 
+  @tracked
   active = true;
 
   get isActive() {
