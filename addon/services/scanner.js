@@ -37,19 +37,18 @@ export default class ScannerService extends Service {
   }
 
   addEventListener() {
-    assert(
-      'window.addEventListener is required',
-      this.window?.addEventListener
-    );
+    assert('window is required', this.window);
+    assert('window.addEventListener is required', this.window.addEventListener);
 
     this.window.addEventListener('keyup', this.onKeyup, false);
     this.enable();
   }
 
   removeEventListener() {
+    assert('window is required', this.window);
     assert(
       'window.removeEventListener is required',
-      this.window?.removeEventListener
+      this.window.removeEventListener
     );
 
     this.window.removeEventListener('keyup', this.onKeyup, false);
