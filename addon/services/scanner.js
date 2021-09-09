@@ -1,7 +1,7 @@
 import Service, { inject as service } from '@ember/service';
 import { isPresent } from '@ember/utils';
 import { action } from '@ember/object';
-import { tracked } from '@ember/tracked';
+import { tracked } from '@glimmer/tracking';
 import { registerDestructor } from '@ember/destroyable';
 import { assert } from '@ember/debug';
 
@@ -11,13 +11,13 @@ export default class ScannerService extends Service {
   @service('browser/window')
   window;
 
+  @tracked
+  active = true;
+
+  barcode = '';
   //   previousState;
 
   onScan;
-  barcode = '';
-
-  @tracked
-  active = true;
 
   get isActive() {
     return this.active;
@@ -29,6 +29,11 @@ export default class ScannerService extends Service {
 
   disable() {
     this.active = false;
+  }
+
+  initialize() {
+    this.removeEventListener();
+    this.addEventListener();
   }
 
   addEventListener() {
