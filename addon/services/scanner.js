@@ -40,7 +40,7 @@ export default class ScannerService extends Service {
     assert('window is required', this.window);
     assert('window.addEventListener is required', this.window.addEventListener);
 
-    this.window.addEventListener('keyup', this.onKeyup, false);
+    this.window.addEventListener('keydown', this.onKeyup, false);
     this.enable();
   }
 
@@ -51,7 +51,7 @@ export default class ScannerService extends Service {
       this.window.removeEventListener
     );
 
-    this.window.removeEventListener('keyup', this.onKeyup, false);
+    this.window.removeEventListener('keydown', this.onKeyup, false);
     this.disable();
   }
 
@@ -62,6 +62,7 @@ export default class ScannerService extends Service {
 
   @action
   onKeyup(event) {
+    console.log(event.key, event.keyCode, event);
     if (isPresent(event)) {
       const keyCode = event.keyCode;
 
@@ -70,7 +71,9 @@ export default class ScannerService extends Service {
           this.onScan?.(this.barcode);
           this.barcode = '';
         } else {
-          this.barcode = this.barcode + event.key;
+          if (event.key !== 'Shift') {
+            this.barcode = this.barcode + event.key;
+          }
         }
       }
     }
