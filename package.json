@@ -32,6 +32,7 @@
     "**/*.js": "eslint --cache"
   },
   "dependencies": {
+    "ember-browser-services": "^1.1.8",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-htmlbars": "^5.7.1",
     "husky": "^7.0.2",
@@ -58,6 +59,8 @@
     "ember-page-title": "^6.2.2",
     "ember-qunit": "^5.1.4",
     "ember-resolver": "^8.0.2",
+    "ember-sinon": "^5.0.0",
+    "ember-sinon-qunit": "^6.0.0",
     "ember-source": "~3.28.0",
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^3.6.0",
