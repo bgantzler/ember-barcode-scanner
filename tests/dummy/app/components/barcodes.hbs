@@ -1,0 +1,20 @@
+<Scanner @onScan={{this.onScan}} />
+<div>
+  <FaIcon @icon="barcode" @size="3x" {{on "click" this.restartScanner}} />
+  <XToggle
+    @theme="flip"
+    @onLabel="Enabled"
+    @offLabel="Disabled"
+    @value={{this.scannerService.isActive}}
+    @onToggle={{fn (mut this.scannerService.active)}}
+  />
+  <button type="button" {{on "click" this.onClear}}>Clear</button>
+  <div>Barcodes:</div>
+  {{#each this.barcodes as |barcode|}}
+    <div>
+      <span>GTIN: {{barcode.data.GTIN}}</span>
+      <span>Lot: {{barcode.data.BATCH}}</span>
+      <span>Exp Date: {{barcode.data.EXP_DATE}}</span>
+    </div>
+  {{/each}}
+</div>
