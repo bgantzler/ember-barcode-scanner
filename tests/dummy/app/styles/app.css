@@ -1,0 +1,6 @@
+.table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 80%;
+  /*max-width: 180px;*/
+  align-items: center;
+}

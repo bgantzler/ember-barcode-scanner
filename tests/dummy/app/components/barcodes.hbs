@@ -1,20 +1,75 @@
 <Scanner @onScan={{this.onScan}} />
 <div>
-  <FaIcon @icon="barcode" @size="3x" {{on "click" this.restartScanner}} />
-  <XToggle
-    @theme="flip"
-    @onLabel="Enabled"
-    @offLabel="Disabled"
-    @value={{this.scannerService.isActive}}
-    @onToggle={{fn (mut this.scannerService.active)}}
-  />
-  <button type="button" {{on "click" this.onClear}}>Clear</button>
-  <div>Barcodes:</div>
-  {{#each this.barcodes as |barcode|}}
-    <div>
-      <span>GTIN: {{barcode.data.GTIN}}</span>
-      <span>Lot: {{barcode.data.BATCH}}</span>
-      <span>Exp Date: {{barcode.data.EXP_DATE}}</span>
-    </div>
-  {{/each}}
+  <div>
+    <FaIcon @icon="barcode" @size="3x" {{on "click" this.restartScanner}} />
+  </div>
+  <div class="table">
+    <div>Active:</div>
+    <XToggle
+      @theme="light"
+      @value={{this.scannerService.isActive}}
+      @onToggle={{fn (mut this.scannerService.active)}}
+    />
+    <div>Service is actively monitoring for keypress</div>
+
+    <div>Stop Propagation:</div>
+    <XToggle
+      @theme="light"
+      @value={{this.scannerService.stopPropagation}}
+      @onToggle={{fn (mut this.scannerService.stopPropagation)}}
+    />
+    <div>Stop immediate propagation on keypress event</div>
+
+    <div>Prevent Default:</div>
+    <XToggle
+      @theme="light"
+      @value={{this.scannerService.preventDefault}}
+      @onToggle={{fn (mut this.scannerService.preventDefault)}}
+    />
+    <div>Prevent default action on keypress event</div>
+
+    <div>Scan Button Key Code:</div>
+    <XToggle
+      @theme="light"
+      @value={{this.scannerService.scanButtonKeyCode}}
+      @onToggle={{fn (mut this.scannerService.scanButtonKeyCode)}}
+    />
+    <div>Key code of the scanner hardware button (if the scanner button acts as
+      a key itself)</div>
+
+    <div>Capture Events:</div>
+    <XToggle
+      @theme="light"
+      @value={{this.scannerService.captureEvents}}
+      @onToggle={{fn (mut this.scannerService.captureEvents)}}
+    />
+    <div>Get the events before any listeners deeper in the DOM</div>
+
+    <div>React To Keydown:</div>
+    <XToggle
+      @theme="light"
+      @value={{this.scannerService.reactToKeydown}}
+      @onToggle={{fn (mut this.scannerService.reactToKeydown)}}
+    />
+    <div>Look for scan input in keyboard events</div>
+
+    <div>react To Paste:</div>
+    <XToggle
+      @theme="light"
+      @value={{this.scannerService.reactToPaste}}
+      @onToggle={{fn (mut this.scannerService.reactToPaste)}}
+    />
+    <div>look for scan input in paste events</div>
+  </div>
+  <div>
+    <button type="button" {{on "click" this.onClear}}>Clear</button>
+    <div>Barcodes:</div>
+    {{#each this.barcodes as |barcode|}}
+      <div>
+        <span>GTIN: {{barcode.data.GTIN}}</span>
+        <span>Lot: {{barcode.data.BATCH}}</span>
+        <span>Exp Date: {{barcode.data.EXP_DATE}}</span>
+      </div>
+    {{/each}}
+  </div>
 </div>
